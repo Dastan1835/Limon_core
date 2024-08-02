@@ -5,7 +5,7 @@ from journal.models import Publication, Category, Hashtag, AboutMe
 
 @admin.register(Publication)
 class PublicationAdmin(admin.ModelAdmin):
-    list_display = ["title"]
+    list_display = ["title", "is_active"]
 
 
 @admin.register(Category)

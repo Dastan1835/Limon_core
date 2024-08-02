@@ -9,12 +9,12 @@ class Category(models.Model):
         verbose_name_plural = "Категории публикаций"
         verbose_name = "Категория публикации"
 
-    def __str__(self):
-        return self.title
+    # def __str__(self):
+    #     return self.title
 
 
 class Hashtag(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255 )
 
     class Meta:
         verbose_name_plural = 'Хештеги'
@@ -25,7 +25,7 @@ class Hashtag(models.Model):
 
 
 class Publication(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, related_name='publications')
     hashtags = models.ManyToManyField(Hashtag, blank=True)
     image = models.ImageField(verbose_name='изображение', null=True)
     title = models.CharField(verbose_name='название', max_length=100, null=True)
@@ -33,6 +33,7 @@ class Publication(models.Model):
     read_time = models.PositiveSmallIntegerField(verbose_name='время чтения', null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name_plural = "Публикации"
